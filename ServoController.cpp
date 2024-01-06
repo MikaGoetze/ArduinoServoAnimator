@@ -22,8 +22,10 @@ void ServoController::SetPositionProvider(ServoPositionProvider *provider)
 
 bool ServoController::Tick(const int deltaTime) const
 {
-    const int angle = positionProvider->Tick( deltaTime, TODO);
+    bool isFinished = false;
+    const int angle = positionProvider->Tick( deltaTime, isFinished );
     servo.write( angle );
+    return isFinished;
 }
 
 bool ServoController::TickControllers(const int deltaTime)
